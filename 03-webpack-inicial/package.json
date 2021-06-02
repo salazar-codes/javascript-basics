@@ -1,0 +1,18 @@
+{
+  "name": "webpack-inicial",
+  "version": "1.0.0",
+  "description": "Este es un modelo de proyecto de webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "Jimmy Salazar",
+  "license": "ISC",
+  "devDependencies": {
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  }
+}
