@@ -30,7 +30,7 @@ const miModulo = (() => {
 
   const inicializarJuego = (numeroJugadores = 2) => {
       puntosJugadores = [];
-      deck = crearDeck();
+      deck = crearDeck(tipos, especiales);
       for (let i = 0; i < numeroJugadores; i++) {
           puntosJugadores.push(0);
       }
@@ -75,7 +75,7 @@ const miModulo = (() => {
           puntosComputadora = acumularPuntos(carta, puntosJugadores.length - 1);
           const imgCarta = crearCarta(carta);
           divCartasJugadores[puntosJugadores.length - 1].append(imgCarta);
-          
+
           if( puntosMinimos > 21 ) break;
       } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21) );
       determinarGanador();
