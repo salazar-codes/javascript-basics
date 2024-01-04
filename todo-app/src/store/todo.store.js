@@ -1,6 +1,6 @@
 import { Todo } from '../todos/models/todo.model';
 
-const Filters = {
+export const Filters = {
     All: 'all',
     Completed: 'Completed',
     Pending: 'Pending',
@@ -18,7 +18,6 @@ const state = {
 }
 
 const initStore = () => {
-    console.log(state);
     loadStore();
 }
 
@@ -40,6 +39,8 @@ const getTodos = ( filter = filters.All) => {
             return [...state.todos]; //Spread para crear un nuevo objeto
         case Filters.Completed:
             return state.todos.filter( todo => todo.done ); //Spread para crear un nuevo objeto
+        case Filters.Pending:
+            return state.todos.filter( todo => !todo.done );
         default:
             throw new Error(`Option ${filter} is not valid.`);
     }
@@ -66,7 +67,7 @@ const deleteTodo = ( todoId ) => {
     saveStateToStorage();
 }
 const deleteCompleted = () => {
-    state.todos = state.todos.filter( todo => todo.done);
+    state.todos = state.todos.filter( todo => !todo.done);
     saveStateToStorage();
 }
 /**
