@@ -19,10 +19,19 @@ const state = {
 
 const initStore = () => {
     console.log(state);
+    loadStore();
 }
 
 const loadStore = () => {
-    console.log(state);
+    if(!localStorage.getItem('state')) return;
+
+    const { todos = [], filter = Filters.All } = JSON.parse( localStorage.getItem('state') );
+    state.todos = todos;
+    state.filter = filter;
+}
+
+const saveStateToStorage = () => {
+    localStorage.setItem('state', JSON.stringify(state));
 }
 
 const getTodos = ( filter = filters.All) => {
@@ -43,18 +52,22 @@ const getTodos = ( filter = filters.All) => {
 const addTodo = ( descripcion ) => {
     if( !descripcion ) throw new Error('Description is required');
     state.todos.push(new Todo(descripcion));
+    saveStateToStorage();
 }
 const toggleTodo = ( todoId ) => {
     state.todos = state.todos.map( todo => {
         if(todo.id === todoId) todo.done = !todo.done;
         return todo;
     })
+    saveStateToStorage();
 }
 const deleteTodo = ( todoId ) => {
     state.todos = state.todos.filter( todo => todo.id !== todoId );
+    saveStateToStorage();
 }
 const deleteCompleted = () => {
     state.todos = state.todos.filter( todo => todo.done);
+    saveStateToStorage();
 }
 /**
  * 
@@ -62,6 +75,7 @@ const deleteCompleted = () => {
  */
 const setFilter = ( newFilter = Filters.All) => {
     state.filter = newFilter;
+    saveStateToStorage();
 }
 const getCurrentFilter = () => {
     return state.filter;
