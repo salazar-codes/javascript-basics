@@ -1,12 +1,13 @@
 import html from './app.html?raw';
 import todoStore, { Filters } from "../store/todo.store";
-import { renderTodos } from './use-cases';
+import { renderTodos, renderPending } from './use-cases';
 
 const ElementIds = {
     TodoList: '.todo-list',
     NewTodoInput: '#new-todo-input',
     ClearCompletedButton: '.clear-completed',
     TodoFilters: '.filtro',
+    PendingCountLabel: '#pending-count',
 }
 
 /**
@@ -18,6 +19,11 @@ export const App = (elementId) => {
     const displayTodos = () => {
         const todos = todoStore.getTodos( todoStore.getCurrentFilter() );
         renderTodos( ElementIds.TodoList, todos );
+        updatePendingCount();
+    }
+
+    const updatePendingCount = () => {
+        renderPending(ElementIds.PendingCountLabel);
     }
 
     // Cuando la función App se llama
@@ -33,6 +39,7 @@ export const App = (elementId) => {
     const todoListUL = document.querySelector( ElementIds.TodoList );
     const clearCompletedButton = document.querySelector( ElementIds.ClearCompletedButton );
     const filtersLIs = document.querySelectorAll( ElementIds.TodoFilters );
+    
 
     // Listener
     newDescriptionInput.addEventListener('keyup',(event)=>{

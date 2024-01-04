@@ -8,11 +8,11 @@ export const Filters = {
 
 const state = {
     todos: [
-        new Todo('Gema del alma'),
-        new Todo('Gema del infinito'),
-        new Todo('Gema del tiempo'),
-        new Todo('Gema del poder'),
-        new Todo('Gema de la realidad'),
+        new Todo('Pollito frito'),
+        new Todo('Ensalada de frutas'),
+        new Todo('Ceviche'),
+        new Todo('Pop corn'),
+        new Todo('Gaseosa'),
     ],
     filter: Filters.All
 }
